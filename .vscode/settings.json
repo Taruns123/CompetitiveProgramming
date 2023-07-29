@@ -7,6 +7,9 @@
     "ostream": "cpp",
     "iostream": "cpp",
     "vector": "cpp",
-    "xstring": "cpp"
+    "xstring": "cpp",
+    "xtree": "cpp",
+    "unordered_set": "cpp",
+    "xhash": "cpp"
   }
 }
