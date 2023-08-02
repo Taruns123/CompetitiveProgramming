@@ -30,7 +30,6 @@ void run_case(){
             cin>>j;     
         }
     }
-
     vector<vector<int>> dp(n,vector<int>(3,0));
     dp[0] = vec[0];
     for (int i = 1; i < n; i++)
@@ -43,9 +42,8 @@ void run_case(){
     }
     cout<<*max_element(dp[n-1].begin(),dp[n-1].end())<<endl;
     
-
-
 }
+
 
 /****************************************************************************************************/
 

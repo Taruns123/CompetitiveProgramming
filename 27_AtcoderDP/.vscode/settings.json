@@ -1,9 +1,15 @@
 {
   "files.exclude": {
-    "**/*.exe": true
+    "**/*.exe": true,
+    ".cph": true,
+    ".vscode": true
   },
   "files.associations": {
     "vector": "cpp",
-    "numeric": "cpp"
+    "numeric": "cpp",
+    "utility": "cpp",
+    "ostream": "cpp",
+    "iostream": "cpp",
+    "iomanip": "cpp"
   }
 }
