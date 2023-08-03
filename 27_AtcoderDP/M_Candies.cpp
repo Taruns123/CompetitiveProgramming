@@ -1,48 +1,70 @@
 #include<bits/stdc++.h>
 using namespace std;
-#define int long long 
+#define nline "\n"
+#define yes "YES"
+#define no "NO"
+#define all(x)   (x).begin(),(x).end()
+#define pb push_back
+#define mp make_pair
+typedef vector<int> vi;
+typedef vector<long long int> vlli;
+typedef long long lli;
+typedef vector<pair<int,int>> vpii;
+typedef pair<int,int> pii;
+typedef pair<int,char> pic;
+typedef pair<char,int> pci;
 
-const int N = 1e5+10;
-const int mod = 1e9+7;
-int memo[N][105];
-int numWays(vector<int> kids, int i, int candLeft){
-    if(i==kids.size()){
-        if(candLeft == 0){
-            return 1;
-        }
-        else return 0;
-    }
-// *******************************************************************
-// ************************* Not done yet ****************************
-// *******************************************************************
-    if(memo[candLeft][i]!=-1) return memo[candLeft][i];
-
-    int ans = 0;
-    for (int j = 0; j <= kids[i] && candLeft-j>=0; j++)
-    {
-        ans =  ((ans%mod) +0ll+ (numWays(kids,i+1,candLeft-j)%mod))%mod;
-    }
-
-    return memo[candLeft][i] = ans%mod;
-    
-}
 
 
 /*****************************************************************************************************/
-
+const int mod = 1e9+7;
 void run_case(){ 
 
-    int n,m;
-    cin>>n>>m;
-    
+    int n, candies;
+    cin>>n>>candies;
+
     vector<int> kids(n);
     for (auto &&i : kids)
     {
         cin>>i;
     }
-    memset(memo,-1,sizeof(memo));
+
+    vector<vector<int>> dp(n+1,vector<int>(candies+1,0));
+
+    dp[0][0] = 1;
+    vector<int> prefSum(candies+1,1);
+    for (int i = 1; i <= n; i++)
+    {
+        
+        
+        for (int j = 0; j <= candies; j++)
+        {
+            
+             dp[i][j]+= prefSum[j];
+             if((j-kids[i-1])>0) {dp[i][j] -= prefSum[j-kids[i-1]-1];}
+             
+             dp[i][j] = ((dp[i][j]%mod)+mod)%mod;
+            
+        }
+        for (int index = 1; index <= candies; index++)
+        {
+            prefSum[index]  = (prefSum[index-1]%mod + dp[i][index]%mod)%mod;
+        }
+        
+    }
+
+
+
     
-    cout<<numWays(kids,0,m)<<endl;
+    
+
+    cout<<dp[n][candies]<<endl;
+    
+    
+    
+    
+
+
 
 }
 
@@ -50,7 +72,7 @@ void run_case(){
 
 
 
-int32_t main(int32_t argc, char const *argv[])
+int main(int argc, char const *argv[])
 {
     ios_base::sync_with_stdio(0); cin.tie(0);
     
