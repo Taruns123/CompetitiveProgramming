@@ -1,14 +1,11 @@
 #include<bits/stdc++.h>
 
 using namespace std;
-int cnt =0;
+
 struct node {
 	node *nxt[26];
-	bool is_end;
 	node() {
 		for (int i = 0; i < 26; i++) nxt[i] = NULL;
-        cnt++;
-		is_end = false;
 	}
 };
 
@@ -25,8 +22,6 @@ void insert_trie(string s) {
 		// goto that node
 		cur = cur->nxt[imap];
 	}
-	// cur -> last node
-	cur->is_end = true;
 }
 
 // O(|s|)
@@ -37,7 +32,7 @@ bool search_trie(string s) {
 		if (cur->nxt[imap] == NULL) return false;
 		cur = cur->nxt[imap];
 	}
-	return cur->is_end;
+	return true;
 }
 
 int main()
@@ -45,28 +40,29 @@ int main()
 
 	root = new node();
 
-	int n;
-	cin >> n;
+	string text = "ababba";
+	string pat = "abaa";
+
+	int n = text.size();
+
 	for (int i = 0; i < n; i++) {
-		string s;
-		cin >> s;
-		insert_trie(s);
+		insert_trie(text.substr(i));
 	}
 
-	if (search_trie("apaar")) {
+	if (search_trie(pat)) {
 		cout << "Found";
 	}
 	else {
-		cout << "Not Found";
+		cout << "Not found";
 	}
+	// all the indexes where this pat is found
 
-	cout << cnt;
+
+
+
+
 
 
 
 	return 0;
 }
-
-
-
-
