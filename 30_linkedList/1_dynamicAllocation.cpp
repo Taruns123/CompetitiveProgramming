@@ -7,7 +7,7 @@ class Vector3{
 public: 
     // Vector3(){};
     Vector3(int a, int b, int c): x(a),y(b),z(c){
-
+        cout<<x<<y<<z<<endl;
     }
 
 };
